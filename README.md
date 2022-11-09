@@ -17,7 +17,7 @@ To learn more about Webhook.site click [here](https://docs.webhook.site/index.ht
 npm install <repo link>
 ```
 
-Once downloaded, you can import transpiled functions from ```sh'webhook-site-plugin/dist/src/webhookSiteHandler'``` into your Cypress project and add next commands:
+Once downloaded, you can import transpiled functions from ```'webhook-site-plugin/dist/src/webhookSiteHandler'``` into your Cypress project and add next commands:
 
 ```js
 Cypress.Commands.add('getWebHookToken', getWebHookToken);
