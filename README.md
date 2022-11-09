@@ -1,15 +1,20 @@
 # webhook-site-plugin
-
-webhook-site-plugin allow for email and webhook testing through webhook.site
-
 ### What is it?
 
-Webhook.site is a developer tool that provides email and webhook testing. This is a third party library and I have no affiliation to webhook.site or any of its partners.
+Webhook.site is a developer tool that provides email and webhook testing. 
+There are two separate editions of Webhook.site:
+* The cloud version of Webhook.site at [https://webhook.site](https://webhook.site)
+* Completely open-source, MIT-licensed version
+
+In this project we use a second option. The cloud version of Webhook.site has been deployed
+by DevOps Team and is reachable through VPN at the address -  [http://webhook.mgmt.kevin.internal]](http://webhook.mgmt.kevin.internal)
+
+To learn more about Webhook.site click [here](https://docs.webhook.site/index.html)
 
 ### Installation
 
 ```sh
-npm install 
+npm install <repo link>
 ```
 
 Once downloaded, you can import transpiled functions from ```sh'webhook-site-plugin/dist/src/webhookSiteHandler'``` into your Cypress project and add next commands:
@@ -26,37 +31,4 @@ Cypress.Commands.add('fetchEmailsContent', fetchEmailsContent);
 ### Example Usage
 
 ```js
-cy.webhookGenerateToken({
-  apikey: 'ff07eb99-ed12-4f55-8fa1-65c7567d41b9',
-  password: 'Password1234',
-}).then((token) => {
-  cy.log(`Token: ${token}`);
-  cy.webhookGetEmailAddress({
-    token: token,
-    apikey: 'ff07eb99-ed12-4f55-8fa1-65c7567d41b9',
-    password: 'Password1234',
-  }).then((emailAddress) => {
-    console.log(emailAddress);
-    cy.log(`Email Address: ${emailAddress}`);
-  });
-  cy.webhookGetURI({
-    token: token,
-    apikey: 'ff07eb99-ed12-4f55-8fa1-65c7567d41b9',
-    password: 'Password1234',
-  }).then((webHookURI) => {
-    console.log(webHookURI);
-    cy.log(`WebHook URI: ${webHookURI}`);
-    cy.request(webHookURI);
-  });
-  cy.webhookGetAllRequests({
-    token: token,
-    apikey: 'ff07eb99-ed12-4f55-8fa1-65c7567d41b9',
-    password: 'Password1234',
-  }).then((responses) => {
-    console.log(responses);
-    responses.forEach((response) => {
-      cy.log(`Response: ${response.ip}`);
-    });
-  });
-});
 ```
