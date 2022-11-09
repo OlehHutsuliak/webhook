@@ -1,8 +1,8 @@
 const { getToken, deleteToken, sendWebhook, getLatesWebhookContent, collectWebhooks, collectEmails} = require('./dist/src/webhookSiteHandler')
 
-Cypress.Commands.add('getToken',  getToken);
-Cypress.Commands.add('deleteToken', deleteToken);
+Cypress.Commands.add('getWebHookToken',  getToken);
+Cypress.Commands.add('deleteWebHookToken', deleteToken);
 Cypress.Commands.add('sendWebhook', sendWebhook);
 Cypress.Commands.add('getLatesWebhookContent', getLatesWebhookContent);
-Cypress.Commands.add('collectWebhooks', collectWebhooks);
-Cypress.Commands.add('collectEmails', collectEmails);
+Cypress.Commands.add('collectWebhooksContent', collectWebhooks);
+Cypress.Commands.add('collectEmailsContent', collectEmails);
