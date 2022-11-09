@@ -7,7 +7,7 @@ There are two separate editions of Webhook.site:
 * Completely open-source, MIT-licensed version
 
 In this project we use a second option. The cloud version of Webhook.site has been deployed
-by DevOps Team and is reachable through VPN at the address -  [http://webhook.mgmt.kevin.internal]](http://webhook.mgmt.kevin.internal)
+by DevOps Team and is reachable through VPN at the address -  [http://webhook.mgmt.kevin.internal](http://webhook.mgmt.kevin.internal)
 
 To learn more about Webhook.site click [here](https://docs.webhook.site/index.html)
 
