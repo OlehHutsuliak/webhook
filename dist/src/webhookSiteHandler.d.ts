@@ -1,7 +1,7 @@
-declare function getToken(): Promise<string>;
-declare function deleteToken(tokenId: string): Promise<object>;
+declare function getWebHookToken(): Promise<string>;
+declare function deleteWebHookToken(tokenId: string): Promise<object>;
 declare function sendWebhook(tokenId: string, payload: object): Promise<object>;
-declare function getLatesWebhookContent(tokenId: string): Promise<object>;
-declare function collectWebhooks(tokenId: string): Promise<object[]>;
-declare function collectEmails(tokenId: string): Promise<object[]>;
-export { getToken, deleteToken, sendWebhook, getLatesWebhookContent, collectWebhooks, collectEmails };
+declare function fetchLatesWebhookContent(tokenId: string): Promise<object>;
+declare function fetchWebhooksContent(tokenId: string): Promise<object[]>;
+declare function fetchEmailsContent(tokenId: string): Promise<object[]>;
+export { getWebHookToken, deleteWebHookToken, sendWebhook, fetchLatesWebhookContent, fetchWebhooksContent, fetchEmailsContent };
