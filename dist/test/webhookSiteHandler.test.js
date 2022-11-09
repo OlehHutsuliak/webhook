@@ -33,24 +33,24 @@ jest.mock('axios');
 const mockedAxios = axios_1.default;
 describe('Tests', () => {
     afterEach(jest.clearAllMocks);
-    test('getToken()', async () => {
+    test('getWebHookToken()', async () => {
         mockedAxios.post.mockResolvedValue(data.mocked_get_token_response);
         const result = await (0, webhookSiteHandler_1.getWebHookToken)();
         expect(mockedAxios.post).toHaveBeenCalledTimes(1);
         expect(result).toBe(data.getToken_expected_result);
     });
-    test('getLatesWebhookContent()', async () => {
+    test('fetchLatesWebhookContent()', async () => {
         mockedAxios.get.mockResolvedValue(data.mocked_get_latest_webhook_content_response);
         const result = await (0, webhookSiteHandler_1.fetchLatesWebhookContent)('tokenId');
         expect(result).toStrictEqual(data.get_latest_webhook_content_result);
     });
-    test('collectWebhooks()', async () => {
+    test('fetchWebhooksContent()', async () => {
         mockedAxios.get.mockResolvedValue(data.mocked_collect_webhooks_response);
         const result = await (0, webhookSiteHandler_1.fetchWebhooksContent)('tokenId');
         expect(mockedAxios.get).toHaveBeenCalledTimes(1);
         expect(result).toStrictEqual(data.collect_webhooks_expected_result);
     });
-    test('collectEmails()', async () => {
+    test('fetchEmailsContent()', async () => {
         mockedAxios.get.mockResolvedValue(data.mocked_collect_emails_response);
         const result = await (0, webhookSiteHandler_1.fetchEmailsContent)('tokenId');
         expect(mockedAxios.get).toHaveBeenCalledTimes(1);

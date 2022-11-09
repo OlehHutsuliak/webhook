@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.fetchEmailsContent = exports.fetchWebhooksContent = exports.fetchLatesWebhookContent = exports.sendWebhook = exports.deleteWebHookToken = exports.getWebHookToken = void 0;
 const axios_1 = __importDefault(require("axios"));
 const helper_1 = require("./helper");
-axios_1.default.defaults.baseURL = Cypress.env('webhook-url');
+axios_1.default.defaults.baseURL = 'http://webhook.mgmt.kevin.internal';
 axios_1.default.defaults.headers.post['Content-Type'] = 'application/json';
 async function getWebHookToken() {
     const response = await axios_1.default.post('/token');
@@ -32,7 +32,7 @@ async function fetchWebhooksContent(tokenId) {
 }
 exports.fetchWebhooksContent = fetchWebhooksContent;
 async function fetchEmailsContent(tokenId) {
-    const response = await axios_1.default.get(`https://webhook.site/token/${tokenId}/requests?query=type:email`);
+    const response = await axios_1.default.get(`/token/${tokenId}/requests?query=type:email`);
     return (0, helper_1.collectEmailsContent)(response.data.data);
 }
 exports.fetchEmailsContent = fetchEmailsContent;

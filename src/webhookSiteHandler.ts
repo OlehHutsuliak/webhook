@@ -28,10 +28,7 @@ async function fetchWebhooksContent(tokenId: string): Promise<object[]> {
 }
 
 async function fetchEmailsContent(tokenId: string): Promise<object[]> {
-  const response = await axios({
-    method: 'get',
-    url: `https://webhook.site/token/${tokenId}/requests?query=type:email`,
-  });
+  const response = await axios.get(`/token/${tokenId}/requests?query=type:email`);
   return collectEmailsContent(response.data.data);
 }
 
