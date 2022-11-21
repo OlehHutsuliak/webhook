@@ -12,10 +12,11 @@
       "outDir": "dist",
       "baseUrl": ".",
       "incremental": true,
-      "noImplicitAny": true
+      "noImplicitAny": true,
+      "types": ["cypress"]
     },
     "include": [
       "src/**/*",
-      "test/**/*",
-      "jest.config.ts"]
+      "cypress/support/*"
+    ]
   }
