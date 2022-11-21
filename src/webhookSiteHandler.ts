@@ -4,22 +4,22 @@ import { collectWebhooksContent, collectEmailsContent } from './helper';
 axios.defaults.baseURL = 'http://webhook.mgmt.kevin.internal';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
-async function getWebHookToken(): Promise<string> {
+async function getWebhookToken(): Promise<string> {
   const response = await axios.post('/token');
   return response.data.uuid;
 }
 
-function deleteWebHookToken(tokenId: string): Promise<object> {
+function deleteWebhookToken(tokenId: string): Promise<Record<string, unknown>> {
   return axios.delete(`token/${tokenId}`);
 }
 
-function sendWebhook(tokenId: string, payload: object): Promise<object> {
+function sendWebhook(tokenId: string, payload: object): Promise<Record<string, unknown>> {
   return axios.post(`${tokenId}`, payload);
 }
 
-async function fetchLatesWebhookContent(tokenId: string): Promise<object> {
-  const responce = await axios.get(`/token/${tokenId}/request/latest/raw`);
-  return responce.data;
+async function fetchLatestWebhookContent(tokenId: string): Promise<object> {
+  const response = await axios.get(`/token/${tokenId}/request/latest/raw`);
+  return response.data;
 }
 
 async function fetchWebhooksContent(tokenId: string): Promise<object[]> {
@@ -33,4 +33,4 @@ async function fetchEmailsContent(tokenId: string): Promise<object[]> {
 }
 
 // eslint-disable-next-line prettier/prettier
-export { getWebHookToken, deleteWebHookToken, sendWebhook, fetchLatesWebhookContent, fetchWebhooksContent, fetchEmailsContent };
+export { getWebhookToken, deleteWebhookToken, sendWebhook, fetchLatestWebhookContent, fetchWebhooksContent, fetchEmailsContent };

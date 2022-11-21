@@ -10,27 +10,14 @@ type EmailData = {
 };
 
 function collectWebhooksContent(array: object[]): object[] {
-  const webhooksContent: object[] = [];
-  array.forEach((data: WebhookData) => {
-    const extractedWebhookContent: object = JSON.parse(data.content);
-    webhooksContent.push(extractedWebhookContent);
-  });
-  return webhooksContent;
+  return array.map((data: WebhookData) => JSON.parse(data.content));
 }
 
 function collectEmailsContent(array: object[]): object[] {
-  const emailsContent: object[] = [];
-  array.forEach((data: EmailData) => {
-    const extractedEmailSubject = data.headers.subject[0];
-    const extractedEmailContent = data.text_content;
-    emailsContent.push(
-      Object.fromEntries([
-        ['subject', extractedEmailSubject],
-        ['content', extractedEmailContent],
-      ])
-    );
-  });
-  return emailsContent;
+  return array.map((data: EmailData) => ({
+    subject: data.headers.subject[0],
+    content: data.text_content,
+  }));
 }
 
 export { collectWebhooksContent, collectEmailsContent };

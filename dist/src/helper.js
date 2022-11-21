@@ -2,25 +2,14 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.collectEmailsContent = exports.collectWebhooksContent = void 0;
 function collectWebhooksContent(array) {
-    const webhooksContent = [];
-    array.forEach((data) => {
-        const extractedWebhookContent = JSON.parse(data.content);
-        webhooksContent.push(extractedWebhookContent);
-    });
-    return webhooksContent;
+    return array.map((data) => JSON.parse(data.content));
 }
 exports.collectWebhooksContent = collectWebhooksContent;
 function collectEmailsContent(array) {
-    const emailsContent = [];
-    array.forEach((data) => {
-        const extractedEmailSubject = data.headers.subject[0];
-        const extractedEmailContent = data.text_content;
-        emailsContent.push(Object.fromEntries([
-            ['subject', extractedEmailSubject],
-            ['content', extractedEmailContent],
-        ]));
-    });
-    return emailsContent;
+    return array.map((data) => ({
+        subject: data.headers.subject[0],
+        content: data.text_content,
+    }));
 }
 exports.collectEmailsContent = collectEmailsContent;
 //# sourceMappingURL=helper.js.map

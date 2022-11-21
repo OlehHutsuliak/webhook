@@ -35,13 +35,13 @@ describe('Tests', () => {
     afterEach(jest.clearAllMocks);
     test('getWebHookToken()', async () => {
         mockedAxios.post.mockResolvedValue(data.mocked_get_token_response);
-        const result = await (0, webhookSiteHandler_1.getWebHookToken)();
+        const result = await (0, webhookSiteHandler_1.getWebhookToken)();
         expect(mockedAxios.post).toHaveBeenCalledTimes(1);
         expect(result).toBe(data.getToken_expected_result);
     });
     test('fetchLatesWebhookContent()', async () => {
         mockedAxios.get.mockResolvedValue(data.mocked_get_latest_webhook_content_response);
-        const result = await (0, webhookSiteHandler_1.fetchLatesWebhookContent)('tokenId');
+        const result = await (0, webhookSiteHandler_1.fetchLatestWebhookContent)('tokenId');
         expect(result).toStrictEqual(data.get_latest_webhook_content_result);
     });
     test('fetchWebhooksContent()', async () => {
