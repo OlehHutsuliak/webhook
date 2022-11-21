@@ -9,7 +9,7 @@ declare global {
        * Custom command to generate Webhook.site token
        * @example cy.getWebhookToken()
        */
-       getWebhookToken(): Promise<string>
+      getWebhookToken(): Promise<string>;
     }
   }
 }
