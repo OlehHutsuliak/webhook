@@ -17,6 +17,7 @@
     },
     "include": [
       "src/**/*",
-      "cypress/support/*"
+      "cypress/support/*",
+      "cypress.d.ts"     
     ]
   }

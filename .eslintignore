@@ -3,4 +3,4 @@ coverage/
 dist/
 cypressCommands.js
 index.d.ts
-cypress-importer.js
+cypress.d.ts
