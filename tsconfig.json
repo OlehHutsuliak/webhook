@@ -3,7 +3,7 @@
       "module": "commonjs",
       "esModuleInterop": true,
       "declaration": true,
-      "removeComments": true,
+      "removeComments": false,
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
       "allowSyntheticDefaultImports": true,
@@ -13,10 +13,10 @@
       "baseUrl": ".",
       "incremental": true,
       "noImplicitAny": true,
-      "types": ["cypress"]
+      "types": ["cypress", "node"]
     },
     "include": [
       "src/**/*",
-      "cypress/support/*" 
+      "cypress/*",
     ]
   }
