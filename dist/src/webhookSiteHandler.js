@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.fetchEmailsContent = exports.fetchWebhooksContent = exports.fetchLatestWebhookContent = exports.sendWebhook = exports.deleteWebhookToken = exports.getWebhookToken = void 0;
 const axios_1 = __importDefault(require("axios"));
 const helper_1 = require("./helper");
-axios_1.default.defaults.baseURL = 'http://webhook.mgmt.kevin.internal';
+axios_1.default.defaults.baseURL = 'https://webhook.site';
 axios_1.default.defaults.headers.post['Content-Type'] = 'application/json';
 async function getWebhookToken() {
     const response = await axios_1.default.post('/token');
