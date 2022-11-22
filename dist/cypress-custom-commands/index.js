@@ -1,4 +1,4 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-require('./custom-commands');
+require('./commands');
 //# sourceMappingURL=index.js.map

@@ -7,4 +7,4 @@ Cypress.Commands.add('sendWebhook', webhookSiteHandler_1.sendWebhook);
 Cypress.Commands.add('fetchLatestWebhookContent', webhookSiteHandler_1.fetchLatestWebhookContent);
 Cypress.Commands.add('fetchWebhooksContent', webhookSiteHandler_1.fetchWebhooksContent);
 Cypress.Commands.add('fetchEmailsContent', webhookSiteHandler_1.fetchEmailsContent);
-//# sourceMappingURL=custom-commands.js.map
+//# sourceMappingURL=commands.js.map
