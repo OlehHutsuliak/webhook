@@ -7,7 +7,7 @@ There are two separate editions of Webhook.site:
 * Completely open-source, MIT-licensed version
 
 In this project we use a second option. The cloud version of Webhook.site has been deployed
-by DevOps Team and is reachable through VPN at the address -  [http://webhook.mgmt.kevin.internal](http://webhook.mgmt.kevin.internal)
+by DevOps Team and is reachable through VPN at the address -  [https://webhook.mgmt.aws.kevin.eu](https://webhook.mgmt.aws.kevin.eu/)
 
 To learn more about Webhook.site click [here](https://docs.webhook.site/index.html)
 
@@ -17,18 +17,9 @@ To learn more about Webhook.site click [here](https://docs.webhook.site/index.ht
 npm install <repo link>
 ```
 
-Once downloaded, you can import transpiled functions from ```'webhook-site-plugin/dist/src/webhookSiteHandler'``` into your Cypress project and add next commands:
+For those who use Cypress, all you need is to add one single line ```require('webhook-site-plugin/dist/cypress-custom-commands')``` into **cypress/support/index file**. So then all custom commands are accessible as global cypress commands. 
 
-```js
-Cypress.Commands.add('getWebHookToken', getWebHookToken);
-Cypress.Commands.add('deleteWebHookToken', deleteWebHookToken);
-Cypress.Commands.add('sendWebhook', sendWebhook);
-Cypress.Commands.add('fetchLatesWebhookContent', fetchLatesWebhookContent);
-Cypress.Commands.add('fetchWebhooksContent', fetchWebhooksContent);
-Cypress.Commands.add('fetchEmailsContent', fetchEmailsContent);
-```
-
-### Example Usage
+### Examples
 
 ```js
 ```
