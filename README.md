@@ -22,4 +22,6 @@ For those who use Cypress, all you need is to add one single line ```require('we
 ### Examples
 
 ```js
+![fetch](https://user-images.githubusercontent.com/72203434/203419571-3e06ece9-0484-4b9d-b6ce-cc78f7c717fa.png)
+![getToken](https://user-images.githubusercontent.com/72203434/203419608-e7b055c7-fbd1-4f50-b6c9-b9e6562769f3.png)
 ```
