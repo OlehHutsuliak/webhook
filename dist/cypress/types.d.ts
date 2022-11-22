@@ -1,4 +1,3 @@
-export {};
 declare global {
     namespace Cypress {
         interface Chainable {
@@ -35,3 +34,4 @@ declare global {
         }
     }
 }
+export {};

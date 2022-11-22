@@ -1,6 +1,4 @@
 /* eslint-disable @typescript-eslint/no-namespace */
-export {};
-
 declare global {
   namespace Cypress {
     interface Chainable {
@@ -37,3 +35,5 @@ declare global {
     }
   }
 }
+
+export {};
