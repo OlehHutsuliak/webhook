@@ -2,7 +2,7 @@ declare global {
     namespace Cypress {
         interface Chainable {
             /**
-             * Custom command to generate webhook token
+             * Custom command to generate webhook token.
              * After creating a token, the URL at https://webhook.mgmt.aws.kevin.eu/{token.uuid} becomes accessible
              * @example cy.getWebhookToken()
              */
@@ -29,7 +29,7 @@ declare global {
             fetchWebhooksContent(tokenId: string): Promise<object[]>;
             /**
              * Custom command that retrieves all emails sent to the URL.
-             * Command can be used only  with cloud verion of Webhook.side service.
+             * Command can be used only  with cloud verion of Webhook.side service
              * @example cy.fetchEmailsContent(<tokenId>)
              */
             fetchEmailsContent(tokenId: string): Promise<object[]>;
