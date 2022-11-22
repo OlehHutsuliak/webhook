@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-namespace */
-import './commands';
+export {};
 /// <reference types="cypress" />
 
 declare global {
