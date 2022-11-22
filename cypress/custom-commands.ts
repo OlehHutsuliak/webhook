@@ -1,5 +1,3 @@
-/// <reference types="cypress" />
-
 import {
   getWebhookToken,
   deleteWebhookToken,
@@ -15,3 +13,5 @@ Cypress.Commands.add('sendWebhook', sendWebhook);
 Cypress.Commands.add('fetchLatestWebhookContent', fetchLatestWebhookContent);
 Cypress.Commands.add('fetchWebhooksContent', fetchWebhooksContent);
 Cypress.Commands.add('fetchEmailsContent', fetchEmailsContent);
+
+export {};
