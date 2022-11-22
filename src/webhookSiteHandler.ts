@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { collectWebhooksContent, collectEmailsContent } from './helper';
 
-axios.defaults.baseURL = 'https://webhook.site';
+axios.defaults.baseURL = 'https://webhook.mgmt.aws.kevin.eu';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 async function getWebhookToken(): Promise<string> {
