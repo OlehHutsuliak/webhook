@@ -1,4 +1,5 @@
 require('./custom-commands');
+// comment
 
 /* eslint-disable @typescript-eslint/no-namespace */
 declare global {
