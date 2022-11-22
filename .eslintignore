@@ -1,6 +1,3 @@
 node_modules/
 coverage/
 dist/
-cypressCommands.js
-index.d.ts
-cypress.d.ts
