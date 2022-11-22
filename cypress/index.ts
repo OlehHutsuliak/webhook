@@ -1,3 +1,5 @@
+require('./custom-commands');
+
 /* eslint-disable @typescript-eslint/no-namespace */
 declare global {
   namespace Cypress {
