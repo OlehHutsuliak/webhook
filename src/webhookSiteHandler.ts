@@ -1,6 +1,8 @@
 import axios from 'axios';
+import axiosRetry from 'axios-retry';
 import { collectWebhooksContent, collectEmailsContent } from './helper';
 
+axiosRetry(axios, { retries: 4 });
 axios.defaults.baseURL = 'https://webhook.mgmt.aws.kevin.eu';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 

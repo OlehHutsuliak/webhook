@@ -5,7 +5,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.fetchEmailsContent = exports.fetchWebhooksContent = exports.fetchLatestWebhookContent = exports.sendWebhook = exports.deleteWebhookToken = exports.getWebhookToken = void 0;
 const axios_1 = __importDefault(require("axios"));
+const axios_retry_1 = __importDefault(require("axios-retry"));
 const helper_1 = require("./helper");
+(0, axios_retry_1.default)(axios_1.default, { retries: 4 });
 axios_1.default.defaults.baseURL = 'https://webhook.mgmt.aws.kevin.eu';
 axios_1.default.defaults.headers.post['Content-Type'] = 'application/json';
 async function getWebhookToken() {
