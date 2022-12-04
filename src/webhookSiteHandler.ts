@@ -22,9 +22,13 @@ function sendWebhook(tokenId: string, payload: object): Promise<Record<string, u
   return axios.post(`${tokenId}`, payload);
 }
 
-async function fetchLatestWebhookContent(tokenId: string): Promise<object> {
-  const response = await axios.get(`/token/${tokenId}/request/latest/raw`);
-  return response.data;
+async function fetchLatestWebhookContent(tokenId: string): Promise<object | string> {
+  try {
+    const response = await axios.get(`/token/${tokenId}/request/latest/raw`);
+    return response.data;
+  } catch (err) {
+    return JSON.stringify(err);
+  }
 }
 
 async function fetchWebhooksContent(tokenId: string): Promise<object[]> {

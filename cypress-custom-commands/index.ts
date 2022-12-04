@@ -24,7 +24,7 @@ declare global {
        * Custom command that retrieves the latest webhook sent to the URL.
        * @example cy.fetchWebhooksContent('e3ea5c4c-f0ab-419e-952e-7358b74422e2')
        */
-      fetchLatestWebhookContent(tokenId: string): Promise<object>;
+      fetchLatestWebhookContent(tokenId: string): Promise<object | string>;
       /**
        * Custom command that retrieves all webhooks sent to the URL.
        * @example cy.fetchWebhooksContent('a4932e68-84e0-4adf-bbff-cb165cf257c8')

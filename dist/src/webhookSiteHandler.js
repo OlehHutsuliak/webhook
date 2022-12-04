@@ -28,8 +28,13 @@ function sendWebhook(tokenId, payload) {
 }
 exports.sendWebhook = sendWebhook;
 async function fetchLatestWebhookContent(tokenId) {
-    const response = await axios_1.default.get(`/token/${tokenId}/request/latest/raw`);
-    return response.data;
+    try {
+        const response = await axios_1.default.get(`/token/${tokenId}/request/latest/raw`);
+        return response.data;
+    }
+    catch (err) {
+        return JSON.stringify(err);
+    }
 }
 exports.fetchLatestWebhookContent = fetchLatestWebhookContent;
 async function fetchWebhooksContent(tokenId) {
