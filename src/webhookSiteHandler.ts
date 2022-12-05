@@ -1,17 +1,14 @@
 import axios from 'axios';
-// import axiosRetry from 'axios-retry';
+import axiosRetry from 'axios-retry';
 import { collectWebhooksContent, collectEmailsContent } from './helper';
 
-axios.defaults.baseURL = 'https://webhook.mgmt.aws.kevin.eu';
+axios.defaults.baseURL = 'https://webhook.site';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
+axiosRetry(axios, { retries: 3 });
 
 async function getWebhookToken(): Promise<string> {
-  try {
-    const response = await axios.post('/token');
-    return response.data.uuid;
-  } catch (err) {
-    return JSON.stringify(err);
-  }
+  const response = await axios.post('/token');
+  return response.data.uuid;
 }
 
 function deleteWebhookToken(tokenId: string): Promise<Record<string, unknown>> {
@@ -26,14 +23,18 @@ async function fetchLatestWebhookContent(tokenId: string): Promise<object | stri
   try {
     const response = await axios.get(`/token/${tokenId}/request/latest/raw`);
     return response.data;
-  } catch (err) {
-    return JSON.stringify(err);
+  } catch (error) {
+    return 'Something went wrong';
   }
 }
 
-async function fetchWebhooksContent(tokenId: string): Promise<object[]> {
-  const response = await axios.get(`/token/${tokenId}/requests?query=method:POST`);
-  return collectWebhooksContent(response.data.data);
+async function fetchWebhooksContent(tokenId: string): Promise<object[] | string> {
+  try {
+    const response = await axios.get(`/token/${tokenId}/requests?query=method:POST`);
+    return collectWebhooksContent(response.data.data);
+  } catch (err) {
+    return JSON.stringify(err);
+  }
 }
 
 async function fetchEmailsContent(tokenId: string): Promise<object[]> {

@@ -29,7 +29,7 @@ declare global {
        * Custom command that retrieves all webhooks sent to the URL.
        * @example cy.fetchWebhooksContent('a4932e68-84e0-4adf-bbff-cb165cf257c8')
        */
-      fetchWebhooksContent(tokenId: string): Promise<object[]>;
+      fetchWebhooksContent(tokenId: string): Promise<object[] | string>;
       /**
        * Custom command that retrieves all emails sent to the URL.
        * Command can be used only  with cloud verion of Webhook.side service
