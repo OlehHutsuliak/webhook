@@ -25,7 +25,7 @@ function sendWebhook(tokenId, payload) {
 exports.sendWebhook = sendWebhook;
 async function fetchLatestWebhookContent(tokenId) {
     try {
-        const response = await axios_1.default.get(`/token/${tokenId}/request/latest/raw`);
+        const response = await axios_1.default.get(`/token/${tokenId}/request/latest/raw`, { 'axios-retry': { retries: 3 } });
         return response.data;
     }
     catch (error) {

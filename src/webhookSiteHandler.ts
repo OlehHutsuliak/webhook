@@ -21,7 +21,7 @@ function sendWebhook(tokenId: string, payload: object): Promise<Record<string, u
 
 async function fetchLatestWebhookContent(tokenId: string): Promise<object | string> {
   try {
-    const response = await axios.get(`/token/${tokenId}/request/latest/raw`);
+    const response = await axios.get(`/token/${tokenId}/request/latest/raw`, { 'axios-retry': { retries: 3 } });
     return response.data;
   } catch (error) {
     return 'Something went wrong';
