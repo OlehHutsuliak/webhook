@@ -1,4 +1,4 @@
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import axiosRetry from 'axios-retry';
 import { collectWebhooksContent, collectEmailsContent } from './helper';
 
@@ -33,7 +33,7 @@ function sendWebhook(tokenId: string, payload: object): Promise<Record<string, u
   }
 }
 
-async function fetchLatestWebhookContent(tokenId: string): Promise<object | string> {
+async function fetchLatestWebhookContent(tokenId: string): Promise<object> {
   const response = await client.get(`/token/${tokenId}/request/latest/raw`);
   return response.data;
 }
@@ -42,8 +42,11 @@ async function fetchWebhooksContent(tokenId: string): Promise<object[] | string>
   try {
     const response = await client.get(`/token/${tokenId}/requests?query=method:POST`);
     return collectWebhooksContent(response.data.data);
-  } catch (err) {
-    return JSON.stringify(err);
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return `axios error__${error.code}\n${error.message}\n${error.stack}`;
+    }
+    return error;
   }
 }
 

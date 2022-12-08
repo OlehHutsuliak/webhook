@@ -13,7 +13,7 @@ const client = axios_1.default.create({
 });
 (0, axios_retry_1.default)(client, {
     retries: 5,
-    retryDelay: () => 1000,
+    retryDelay: () => 2000,
     retryCondition: () => true,
 });
 async function getWebhookToken() {
@@ -26,17 +26,20 @@ function deleteWebhookToken(tokenId) {
 }
 exports.deleteWebhookToken = deleteWebhookToken;
 function sendWebhook(tokenId, payload) {
-    return client.post(`${tokenId}`, payload);
+    try {
+        return client.post(`${tokenId}`, payload);
+    }
+    catch (error) {
+        if (axios_1.default.isAxiosError(error)) {
+            return `${error.code}\n${error.message}\n${error.stack}`;
+        }
+        return 'custom message';
+    }
 }
 exports.sendWebhook = sendWebhook;
 async function fetchLatestWebhookContent(tokenId) {
-    try {
-        const response = await client.get(`/token/${tokenId}/request/latest/raw`, { 'axios-retry': { retries: 3 } });
-        return response.data;
-    }
-    catch (error) {
-        return 'Something went wrong';
-    }
+    const response = await client.get(`/token/${tokenId}/request/latest/raw`);
+    return response.data;
 }
 exports.fetchLatestWebhookContent = fetchLatestWebhookContent;
 async function fetchWebhooksContent(tokenId) {
@@ -44,8 +47,11 @@ async function fetchWebhooksContent(tokenId) {
         const response = await client.get(`/token/${tokenId}/requests?query=method:POST`);
         return (0, helper_1.collectWebhooksContent)(response.data.data);
     }
-    catch (err) {
-        return JSON.stringify(err);
+    catch (error) {
+        if (axios_1.default.isAxiosError(error)) {
+            return `axios error__${error.code}\n${error.message}\n${error.stack}`;
+        }
+        return error;
     }
 }
 exports.fetchWebhooksContent = fetchWebhooksContent;
