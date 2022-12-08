@@ -25,15 +25,22 @@ function deleteWebhookToken(tokenId) {
     return client.delete(`token/${tokenId}`);
 }
 exports.deleteWebhookToken = deleteWebhookToken;
+// function sendWebhook(tokenId: string, payload: object): Promise<Record<string, unknown>> | string {
+//   try {
+//     return client.post(`${tokenId}`, payload);
+//   } catch (error) {
+//     if (axios.isAxiosError(error)) {
+//       return `${error.code}\n${error.message}\n${error.stack}`;
+//     }
+//     return 'custom message';
+//   }
+// }
 function sendWebhook(tokenId, payload) {
     try {
         return client.post(`${tokenId}`, payload);
     }
     catch (error) {
-        if (axios_1.default.isAxiosError(error)) {
-            return `${error.code}\n${error.message}\n${error.stack}`;
-        }
-        return 'custom message';
+        return error.toJson();
     }
 }
 exports.sendWebhook = sendWebhook;
