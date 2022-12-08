@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import axiosRetry from 'axios-retry';
 import { collectWebhooksContent, collectEmailsContent } from './helper';
 
@@ -9,7 +9,7 @@ const client = axios.create({
 
 axiosRetry(client, {
   retries: 5,
-  retryDelay: () => 1000,
+  retryDelay: () => 2000,
   retryCondition: () => true,
 });
 
@@ -22,17 +22,20 @@ function deleteWebhookToken(tokenId: string): Promise<Record<string, unknown>> {
   return client.delete(`token/${tokenId}`);
 }
 
-function sendWebhook(tokenId: string, payload: object): Promise<Record<string, unknown>> {
-  return client.post(`${tokenId}`, payload);
+function sendWebhook(tokenId: string, payload: object): Promise<Record<string, unknown>> | string {
+  try {
+    return client.post(`${tokenId}`, payload);
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return `${error.code}\n${error.message}\n${error.stack}`;
+    }
+    return 'custom message';
+  }
 }
 
 async function fetchLatestWebhookContent(tokenId: string): Promise<object | string> {
-  try {
-    const response = await client.get(`/token/${tokenId}/request/latest/raw`, { 'axios-retry': { retries: 3 } });
-    return response.data;
-  } catch (error) {
-    return 'Something went wrong';
-  }
+  const response = await client.get(`/token/${tokenId}/request/latest/raw`);
+  return response.data;
 }
 
 async function fetchWebhooksContent(tokenId: string): Promise<object[] | string> {
