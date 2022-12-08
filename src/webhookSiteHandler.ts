@@ -22,14 +22,22 @@ function deleteWebhookToken(tokenId: string): Promise<Record<string, unknown>> {
   return client.delete(`token/${tokenId}`);
 }
 
-function sendWebhook(tokenId: string, payload: object): Promise<Record<string, unknown>> | string {
+// function sendWebhook(tokenId: string, payload: object): Promise<Record<string, unknown>> | string {
+//   try {
+//     return client.post(`${tokenId}`, payload);
+//   } catch (error) {
+//     if (axios.isAxiosError(error)) {
+//       return `${error.code}\n${error.message}\n${error.stack}`;
+//     }
+//     return 'custom message';
+//   }
+// }
+
+function sendWebhook(tokenId: string, payload: object): Promise<Record<string, unknown>> {
   try {
     return client.post(`${tokenId}`, payload);
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      return `${error.code}\n${error.message}\n${error.stack}`;
-    }
-    return 'custom message';
+    return error.toJson();
   }
 }
 
