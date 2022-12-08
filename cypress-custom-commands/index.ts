@@ -19,7 +19,7 @@ declare global {
        * Custom command to send payload to Webhook.site
        * @example cy.sendWebhook('0e18c600-bbf6-4db9-b6db-2ec0625ac1cd', { id: 1, name: 'Kevin' })
        */
-      sendWebhook(tokenId: string, payload: object): Promise<Record<string, unknown>>;
+      sendWebhook(tokenId: string, payload: object): Promise<Record<string, unknown> | string>;
       /**
        * Custom command that retrieves the latest webhook sent to the URL.
        * @example cy.fetchWebhooksContent('e3ea5c4c-f0ab-419e-952e-7358b74422e2')
