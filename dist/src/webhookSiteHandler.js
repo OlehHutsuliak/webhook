@@ -7,64 +7,38 @@ exports.fetchEmailsContent = exports.fetchWebhooksContent = exports.fetchLatestW
 const axios_1 = __importDefault(require("axios"));
 const axios_retry_1 = __importDefault(require("axios-retry"));
 const helper_1 = require("./helper");
-const client = axios_1.default.create({
-    baseURL: 'https://webhook.site',
-    headers: { 'Content-Type': 'application/json' },
-});
-(0, axios_retry_1.default)(client, {
+axios_1.default.defaults.baseURL = 'https://webhook.mgmt.aws.kevin.eu';
+axios_1.default.defaults.headers.post['Content-Type'] = 'application/json';
+(0, axios_retry_1.default)(axios_1.default, {
     retries: 5,
     retryDelay: () => 2000,
     retryCondition: () => true,
 });
 async function getWebhookToken() {
-    const response = await client.post('/token');
+    const response = await axios_1.default.post('/token');
     return response.data.uuid;
 }
 exports.getWebhookToken = getWebhookToken;
 function deleteWebhookToken(tokenId) {
-    return client.delete(`token/${tokenId}`);
+    return axios_1.default.delete(`token/${tokenId}`);
 }
 exports.deleteWebhookToken = deleteWebhookToken;
-// function sendWebhook(tokenId: string, payload: object): Promise<Record<string, unknown>> | string {
-//   try {
-//     return client.post(`${tokenId}`, payload);
-//   } catch (error) {
-//     if (axios.isAxiosError(error)) {
-//       return `${error.code}\n${error.message}\n${error.stack}`;
-//     }
-//     return 'custom message';
-//   }
-// }
 function sendWebhook(tokenId, payload) {
-    try {
-        return client.post(`${tokenId}`, payload);
-    }
-    catch (error) {
-        return error.toJson();
-    }
+    return axios_1.default.post(`${tokenId}`, payload);
 }
 exports.sendWebhook = sendWebhook;
 async function fetchLatestWebhookContent(tokenId) {
-    const response = await client.get(`/token/${tokenId}/request/latest/raw`);
+    const response = await axios_1.default.get(`/token/${tokenId}/request/latest/raw`);
     return response.data;
 }
 exports.fetchLatestWebhookContent = fetchLatestWebhookContent;
 async function fetchWebhooksContent(tokenId) {
-    try {
-        const response = await client.get(`/token/${tokenId}/requests?query=method:POST`);
-        return (0, helper_1.collectWebhooksContent)(response.data.data);
-    }
-    catch (error) {
-        if (axios_1.default.isAxiosError(error)) {
-            return `axios error__${error.code}\n${error.message}\n${error.stack}`;
-        }
-        return error;
-    }
+    const response = await axios_1.default.get(`/token/${tokenId}/requests?query=method:POST`);
+    return (0, helper_1.collectWebhooksContent)(response.data.data);
 }
 exports.fetchWebhooksContent = fetchWebhooksContent;
 async function fetchEmailsContent(tokenId) {
-    const response = await client.get(`/token/${tokenId}/requests?query=type:email`);
+    const response = await axios_1.default.get(`/token/${tokenId}/requests?query=type:email`);
     return (0, helper_1.collectEmailsContent)(response.data.data);
 }
 exports.fetchEmailsContent = fetchEmailsContent;
-//# sourceMappingURL=webhookSiteHandler.js.map

@@ -12,4 +12,3 @@ function collectEmailsContent(array) {
     }));
 }
 exports.collectEmailsContent = collectEmailsContent;
-//# sourceMappingURL=helper.js.map
