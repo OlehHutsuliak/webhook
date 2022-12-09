@@ -2,7 +2,6 @@
     "files": [],
     "references": [
       { "path": "cypress-custom-commands"},
-      { "path": "test"},
       { "path": "src" },
     ]
   }
