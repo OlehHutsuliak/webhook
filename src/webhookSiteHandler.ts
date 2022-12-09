@@ -25,13 +25,13 @@ function sendWebhook(tokenId: string, payload: object): Promise<Record<string, u
 }
 
 async function fetchLatestWebhookContent(tokenId: string): Promise<object> {
-  const response = await axios.get(`/token/${tokenId}/request/latest/raw`);
-  return response.data;
+  const response = await axios.get(`/token/${tokenId}/requests?query=method:POST`);
+  return response.data.slice(-1)[0];
 }
 
 async function fetchWebhooksContent(tokenId: string): Promise<object[] | string> {
   const response = await axios.get(`/token/${tokenId}/requests?query=method:POST`);
-  return collectWebhooksContent(response.data.data);
+  return collectWebhooksContent(response.data[0].data);
 }
 
 async function fetchEmailsContent(tokenId: string): Promise<object[]> {
