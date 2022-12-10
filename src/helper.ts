@@ -2,10 +2,6 @@ type WebhookData = {
   content: string;
 };
 
-type WebhookContent = {
-  content: Record<string, unknown>;
-};
-
 type EmailData = {
   text_content: string;
   headers: {
@@ -23,5 +19,10 @@ function collectEmailsContent(array: object[]): object[] {
     content: data.text_content,
   }));
 }
+
+// function parseLatestWebhook(array: object[]): object[] {
+//   const latestWebhook = array.slice(-1)[0];
+//   return latestWebhook.map((data: WebhookData) => JSON.parse(data.content));
+// }
 
 export { collectWebhooksContent, collectEmailsContent };

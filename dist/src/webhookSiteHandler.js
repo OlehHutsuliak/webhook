@@ -29,7 +29,8 @@ function sendWebhook(tokenId, payload) {
 exports.sendWebhook = sendWebhook;
 async function fetchLatestWebhookContent(tokenId) {
     const response = await axios_1.default.get(`/token/${tokenId}/requests?query=method:POST`);
-    return response.data.data.slice(-1)[0].content;
+    const obj = JSON.parse(response.data.data.slice(-1)[0].content);
+    return obj;
 }
 exports.fetchLatestWebhookContent = fetchLatestWebhookContent;
 async function fetchWebhooksContent(tokenId) {
