@@ -2,6 +2,10 @@ type WebhookData = {
   content: string;
 };
 
+type WebhookContent = {
+  content: Record<string, unknown>;
+};
+
 type EmailData = {
   text_content: string;
   headers: {
