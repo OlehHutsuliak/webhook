@@ -29,12 +29,12 @@ function sendWebhook(tokenId, payload) {
 exports.sendWebhook = sendWebhook;
 async function fetchLatestWebhookContent(tokenId) {
     const response = await axios_1.default.get(`/token/${tokenId}/requests?query=method:POST`);
-    return response.data;
+    return response.data.data.slice(-1)[0].content;
 }
 exports.fetchLatestWebhookContent = fetchLatestWebhookContent;
 async function fetchWebhooksContent(tokenId) {
     const response = await axios_1.default.get(`/token/${tokenId}/requests?query=method:POST`);
-    return (0, helper_1.collectWebhooksContent)(response.data[0].data);
+    return (0, helper_1.collectWebhooksContent)(response.data.data);
 }
 exports.fetchWebhooksContent = fetchWebhooksContent;
 async function fetchEmailsContent(tokenId) {
