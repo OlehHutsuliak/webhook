@@ -26,8 +26,7 @@ function sendWebhook(tokenId: string, payload: object): Promise<Record<string, u
 
 async function fetchLatestWebhookContent(tokenId: string): Promise<object> {
   const response = await axios.get(`/token/${tokenId}/requests?query=method:POST`);
-  const obj = JSON.parse(response.data.data.slice(-1)[0].content);
-  return obj;
+  return response;
 }
 
 async function fetchWebhooksContent(tokenId: string): Promise<object[] | string> {
