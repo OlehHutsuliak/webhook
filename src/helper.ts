@@ -20,9 +20,4 @@ function collectEmailsContent(array: object[]): object[] {
   }));
 }
 
-// function parseLatestWebhook(array: object[]): object[] {
-//   const latestWebhook = array.slice(-1)[0];
-//   return latestWebhook.map((data: WebhookData) => JSON.parse(data.content));
-// }
-
 export { collectWebhooksContent, collectEmailsContent };

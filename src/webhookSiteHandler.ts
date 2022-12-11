@@ -1,19 +1,20 @@
-import axios from 'axios';
-import axiosRetry from 'axios-retry';
 import * as rax from 'retry-axios';
+import axios from 'axios';
+// import axiosRetry from 'axios-retry';
 import { collectWebhooksContent, collectEmailsContent } from './helper';
 
 axios.defaults.baseURL = 'https://webhook.mgmt.aws.kevin.eu';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 axios.defaults.raxConfig = {
-  retry: 3,
+  statusCodesToRetry: [[500]],
 };
 
-axiosRetry(axios, {
-  retries: 5,
-  retryDelay: () => 2000,
-  retryCondition: () => true,
-});
+rax.attach(axios);
+// axiosRetry(axios, {
+//   retries: 5,
+//   retryDelay: () => 2000,
+//   retryCondition: () => true,
+// });
 
 async function getWebhookToken(): Promise<string> {
   const response = await axios.post('/token');
