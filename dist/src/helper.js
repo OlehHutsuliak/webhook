@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.collectEmailsContent = exports.collectWebhooksContent = void 0;
+exports.checkResponse = exports.collectEmailsContent = exports.collectWebhooksContent = void 0;
 function collectWebhooksContent(array) {
     return array.map((data) => JSON.parse(data.content));
 }
@@ -12,3 +12,10 @@ function collectEmailsContent(array) {
     }));
 }
 exports.collectEmailsContent = collectEmailsContent;
+function checkResponse(response) {
+    while (response.data.total === 0) {
+        response();
+    }
+    return JSON.parse(response.data.data.slice(-1)[0].content);
+}
+exports.checkResponse = checkResponse;

@@ -20,4 +20,11 @@ function collectEmailsContent(array: object[]): object[] {
   }));
 }
 
-export { collectWebhooksContent, collectEmailsContent };
+function checkResponse(response: any): Promise<Record<string, unknown>> {
+  while (response.data.total === 0) {
+    response();
+  }
+  return JSON.parse(response.data.data.slice(-1)[0].content);
+}
+
+export { collectWebhooksContent, collectEmailsContent, checkResponse };
