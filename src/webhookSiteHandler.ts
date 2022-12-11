@@ -9,11 +9,11 @@ axios.defaults.raxConfig = {
   retry: 3,
 };
 
-// axiosRetry(axios, {
-//   retries: 5,
-//   retryDelay: () => 2000,
-//   retryCondition: (error: AxiosError<unknown, any>) => error.data.total === 0,
-// });
+axiosRetry(axios, {
+  retries: 5,
+  retryDelay: () => 2000,
+  retryCondition: () => true,
+});
 
 async function getWebhookToken(): Promise<string> {
   const response = await axios.post('/token');
