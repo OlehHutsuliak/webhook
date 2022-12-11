@@ -1,5 +1,5 @@
 import axios from 'axios';
-// import axiosRetry from 'axios-retry';
+import axiosRetry from 'axios-retry';
 import * as rax from 'retry-axios';
 import { collectWebhooksContent, collectEmailsContent } from './helper';
 
