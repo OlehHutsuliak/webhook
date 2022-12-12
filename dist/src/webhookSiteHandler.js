@@ -28,14 +28,15 @@ function sendWebhook(tokenId, payload) {
 }
 exports.sendWebhook = sendWebhook;
 async function fetchLatestWebhookContent(tokenId) {
-    const call = await axios_1.default.get(`/token/${tokenId}/requests?query=method:POST`);
-    const response = (0, helper_1.checkResponse)(call);
-    return response;
+    const response = await axios_1.default.get(`/token/${tokenId}/requests?query=method:POST`);
+    const webhookContent = (0, helper_1.checkResponse)(response);
+    return JSON.parse(webhookContent.slice(-1)[0].content);
 }
 exports.fetchLatestWebhookContent = fetchLatestWebhookContent;
 async function fetchWebhooksContent(tokenId) {
     const response = await axios_1.default.get(`/token/${tokenId}/requests?query=method:POST`);
-    return (0, helper_1.collectWebhooksContent)(response.data.data);
+    const webhookContent = (0, helper_1.checkResponse)(response);
+    return (0, helper_1.collectWebhooksContent)(webhookContent);
 }
 exports.fetchWebhooksContent = fetchWebhooksContent;
 async function fetchEmailsContent(tokenId) {

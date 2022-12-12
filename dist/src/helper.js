@@ -13,9 +13,15 @@ function collectEmailsContent(array) {
 }
 exports.collectEmailsContent = collectEmailsContent;
 function checkResponse(response) {
+    let attempts = 0;
     while (response.data.total === 0) {
-        response();
+        attempts += 1;
+        if (attempts > 20) {
+            throw new Error('After 20 attemps to fetch webhook content from Webhook.site service request failed.');
+        }
+        // eslint-disable-next-line no-unused-expressions
+        response;
     }
-    return JSON.parse(response.data.data.slice(-1)[0].content);
+    return response.data.data;
 }
 exports.checkResponse = checkResponse;

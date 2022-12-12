@@ -1,6 +1,6 @@
 import axios from 'axios';
 import axiosRetry from 'axios-retry';
-import { collectWebhooksContent, collectEmailsContent, checkResponse } from './helper';
+import { collectWebhooksContent, collectEmailsContent, checkResponse, ResposeData } from './helper';
 
 axios.defaults.baseURL = 'https://webhook.mgmt.aws.kevin.eu';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
@@ -24,15 +24,16 @@ function sendWebhook(tokenId: string, payload: object): Promise<Record<string, u
   return axios.post(`${tokenId}`, payload);
 }
 
-async function fetchLatestWebhookContent(tokenId: string): Promise<Record<string, unknown>> {
-  const call = await axios.get(`/token/${tokenId}/requests?query=method:POST`);
-  const response = checkResponse(call);
-  return response;
+async function fetchLatestWebhookContent(tokenId: string): Promise<object> {
+  const response = await axios.get(`/token/${tokenId}/requests?query=method:POST`);
+  const webhookContent: ResposeData = checkResponse(response);
+  return JSON.parse(webhookContent.slice(-1)[0].content);
 }
 
-async function fetchWebhooksContent(tokenId: string): Promise<object[] | string> {
+async function fetchWebhooksContent(tokenId: string): Promise<object[]> {
   const response = await axios.get(`/token/${tokenId}/requests?query=method:POST`);
-  return collectWebhooksContent(response.data.data);
+  const webhookContent: ResposeData = checkResponse(response);
+  return collectWebhooksContent(webhookContent);
 }
 
 async function fetchEmailsContent(tokenId: string): Promise<object[]> {
