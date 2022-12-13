@@ -4,7 +4,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = __importDefault(require("axios"));
-let retries = 0;
 axios_1.default.defaults.baseURL = 'https://webhook.mgmt.aws.kevin.eu';
 axios_1.default.defaults.headers.post['Content-Type'] = 'application/json';
 axios_1.default.defaults['axios-retry'] = {
@@ -18,14 +17,13 @@ axios_1.default.interceptors.response.use((response) => {
         return Promise.resolve(response);
     }
     if (config['axios-retry'].retries === 0) {
-        return Promise.reject(Error(`After ${retries} attemps to fetch webhook content from Webhook.site service request failed.`));
+        return Promise.reject(Error(`After ${axios_1.default.defaults['axios-retry'].retries} attemps to fetch webhook content from Webhook.site service request failed.`));
     }
     config['axios-retry'].retries -= 1;
-    retries += 1;
     const delayRetryRequest = new Promise((resolve) => {
         setTimeout(() => {
             resolve();
-        }, config.retryDelay || 3000);
+        }, config['axios-retry'].retryDelay(undefined, undefined) || 3000);
     });
     return delayRetryRequest.then(() => (0, axios_1.default)(config));
 }, undefined);
